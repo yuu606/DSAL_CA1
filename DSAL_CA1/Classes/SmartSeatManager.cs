@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
-    internal class Node
+    internal class SmartSeatManager
     {
     }
 }

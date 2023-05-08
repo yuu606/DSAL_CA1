@@ -21,22 +21,13 @@ namespace DSAL_CA1
             this.normalModeToolStripMenuItem.Click += new EventHandler(this.normalModeToolStripMenuItem_Click);
         }
 
-        private void ParentForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void simulationModeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void normalModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(form1 != null)
+            if (form1 != null)
             {
                 form1.Show();
-            } else
+            }
+            else
             {
                 form1 = new Form1();
                 form1.MdiParent = this;
@@ -46,12 +37,30 @@ namespace DSAL_CA1
 
         private void safeDistanceModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (form2 != null)
+            {
+                form2.Show();
+            }
+            else
+            {
+                form2 = new Form2();
+                form2.MdiParent = this;
+                form2.Show();
+            }
         }
 
         private void safeDistanceSmartModeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (form3 != null)
+            {
+                form3.Show();
+            }
+            else
+            {
+                form3 = new Form3();
+                form3.MdiParent = this;
+                form3.Show();
+            }
         }
     }
 }

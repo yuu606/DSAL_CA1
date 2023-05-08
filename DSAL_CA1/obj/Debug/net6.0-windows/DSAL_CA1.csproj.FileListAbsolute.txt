@@ -18,3 +18,4 @@ C:\DSAL\CA1\DSAL_CA1\obj\Debug\net6.0-windows\refint\DSAL_CA1.dll
 C:\DSAL\CA1\DSAL_CA1\obj\Debug\net6.0-windows\DSAL_CA1.pdb
 C:\DSAL\CA1\DSAL_CA1\obj\Debug\net6.0-windows\DSAL_CA1.genruntimeconfig.cache
 C:\DSAL\CA1\DSAL_CA1\obj\Debug\net6.0-windows\ref\DSAL_CA1.dll
+C:\DSAL\CA1\DSAL_CA1\obj\Debug\net6.0-windows\DSAL_CA1.Properties.Resources.resources

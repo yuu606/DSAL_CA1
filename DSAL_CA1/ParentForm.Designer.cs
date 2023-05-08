@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             simulationModeToolStripMenuItem = new ToolStripMenuItem();
             normalModeToolStripMenuItem = new ToolStripMenuItem();
@@ -42,7 +43,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { simulationModeToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1058, 33);
+            menuStrip1.Size = new Size(1358, 33);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -78,13 +79,15 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1058, 678);
+            BackColor = SystemColors.ButtonFace;
+            BackgroundImageLayout = ImageLayout.None;
+            ClientSize = new Size(1358, 1170);
             Controls.Add(menuStrip1);
+            ForeColor = SystemColors.Control;
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "ParentForm";
             Text = "ParentForm";
-            Load += ParentForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
