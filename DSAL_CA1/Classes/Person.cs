@@ -33,5 +33,10 @@ namespace DSAL_CA1.Classes
             return button;
         }
 
+        public Button Button
+        {
+            get; set;
+        }
+
     }
 }

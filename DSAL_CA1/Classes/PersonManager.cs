@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
-    internal class PersonManager
+    class PersonManager
     {
+
+        PersonManager() { }
+        
+        private void getPerson(Char pChar)
+        {
+
+        }
     }
 }

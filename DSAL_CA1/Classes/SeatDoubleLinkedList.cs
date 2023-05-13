@@ -7,6 +7,7 @@ using System.Xml.Linq;
 
 namespace DSAL_CA1.Classes
 {
+    [Serializable]
     public class SeatDoubleLinkedList
     {
         public NormalNode Start { get; set; }
@@ -46,6 +47,19 @@ namespace DSAL_CA1.Classes
             p.Next = newNode;
             newNode.Previous = p;
         }//end of InsertAtEnd
+
+        public void deleteAllNodes()
+        {
+            NormalNode temp = new NormalNode();
+            while (this.Start != null)
+            {
+                temp = this.Start;
+                this.Start = (NormalNode)this.Start.Next;
+                temp = null;
+            }
+            Console.WriteLine("All nodes are deleted successfully.");
+        }
+
 
         public void InsertBefore(Seat pSeatData) 
         {

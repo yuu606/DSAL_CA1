@@ -47,7 +47,7 @@
             label5 = new Label();
             textMaxSeats = new TextBox();
             buttonEndSimulation = new Button();
-            groupBox1 = new GroupBox();
+            groupBoxManualEditor = new GroupBox();
             radioDisable = new RadioButton();
             radioEnable = new RadioButton();
             buttonDisableAllSeats = new Button();
@@ -58,9 +58,11 @@
             textNumPeople = new TextBox();
             labelNoOfPeople = new Label();
             panelSeats = new Panel();
-            button13 = new Button();
+            textScreen = new TextBox();
+            buttonUndo = new Button();
+            buttonRedo = new Button();
             menuStrip1.SuspendLayout();
-            groupBox1.SuspendLayout();
+            groupBoxManualEditor.SuspendLayout();
             panelSeats.SuspendLayout();
             SuspendLayout();
             // 
@@ -127,7 +129,7 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(38, 100);
+            label1.Location = new Point(38, 139);
             label1.Name = "label1";
             label1.Size = new Size(146, 25);
             label1.TabIndex = 3;
@@ -137,7 +139,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(38, 134);
+            label2.Location = new Point(38, 173);
             label2.Name = "label2";
             label2.Size = new Size(124, 25);
             label2.TabIndex = 4;
@@ -147,7 +149,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(38, 171);
+            label3.Location = new Point(38, 210);
             label3.Name = "label3";
             label3.Size = new Size(130, 25);
             label3.TabIndex = 5;
@@ -157,7 +159,7 @@
             // 
             label4.AutoSize = true;
             label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(34, 208);
+            label4.Location = new Point(34, 247);
             label4.Name = "label4";
             label4.Size = new Size(158, 25);
             label4.TabIndex = 6;
@@ -165,28 +167,28 @@
             // 
             // textNumRows
             // 
-            textNumRows.Location = new Point(198, 94);
+            textNumRows.Location = new Point(198, 133);
             textNumRows.Name = "textNumRows";
             textNumRows.Size = new Size(150, 31);
             textNumRows.TabIndex = 7;
             // 
             // textSeatPRow
             // 
-            textSeatPRow.Location = new Point(198, 131);
+            textSeatPRow.Location = new Point(198, 170);
             textSeatPRow.Name = "textSeatPRow";
             textSeatPRow.Size = new Size(150, 31);
             textSeatPRow.TabIndex = 8;
             // 
             // textRowDivider
             // 
-            textRowDivider.Location = new Point(198, 168);
+            textRowDivider.Location = new Point(198, 207);
             textRowDivider.Name = "textRowDivider";
             textRowDivider.Size = new Size(150, 31);
             textRowDivider.TabIndex = 9;
             // 
             // textColumnDivider
             // 
-            textColumnDivider.Location = new Point(198, 205);
+            textColumnDivider.Location = new Point(198, 244);
             textColumnDivider.Name = "textColumnDivider";
             textColumnDivider.Size = new Size(150, 31);
             textColumnDivider.TabIndex = 10;
@@ -195,7 +197,7 @@
             // 
             buttonGenerateSeats.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             buttonGenerateSeats.ForeColor = SystemColors.ActiveCaptionText;
-            buttonGenerateSeats.Location = new Point(38, 326);
+            buttonGenerateSeats.Location = new Point(38, 328);
             buttonGenerateSeats.Name = "buttonGenerateSeats";
             buttonGenerateSeats.Size = new Size(310, 34);
             buttonGenerateSeats.TabIndex = 11;
@@ -207,7 +209,7 @@
             // 
             label5.AutoSize = true;
             label5.ForeColor = SystemColors.ActiveCaptionText;
-            label5.Location = new Point(38, 243);
+            label5.Location = new Point(38, 368);
             label5.Name = "label5";
             label5.Size = new Size(92, 25);
             label5.TabIndex = 12;
@@ -215,7 +217,7 @@
             // 
             // textMaxSeats
             // 
-            textMaxSeats.Location = new Point(147, 243);
+            textMaxSeats.Location = new Point(147, 368);
             textMaxSeats.Name = "textMaxSeats";
             textMaxSeats.Size = new Size(201, 31);
             textMaxSeats.TabIndex = 13;
@@ -233,19 +235,19 @@
             buttonEndSimulation.UseVisualStyleBackColor = false;
             buttonEndSimulation.Click += buttonEndSimulation_Click;
             // 
-            // groupBox1
+            // groupBoxManualEditor
             // 
-            groupBox1.Controls.Add(radioDisable);
-            groupBox1.Controls.Add(radioEnable);
-            groupBox1.Controls.Add(buttonDisableAllSeats);
-            groupBox1.Controls.Add(buttonEnableAllSeats);
-            groupBox1.Controls.Add(buttonEditorMode);
-            groupBox1.Location = new Point(42, 783);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(300, 198);
-            groupBox1.TabIndex = 19;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Manual Editor";
+            groupBoxManualEditor.Controls.Add(radioDisable);
+            groupBoxManualEditor.Controls.Add(radioEnable);
+            groupBoxManualEditor.Controls.Add(buttonDisableAllSeats);
+            groupBoxManualEditor.Controls.Add(buttonEnableAllSeats);
+            groupBoxManualEditor.Controls.Add(buttonEditorMode);
+            groupBoxManualEditor.Location = new Point(42, 783);
+            groupBoxManualEditor.Name = "groupBoxManualEditor";
+            groupBoxManualEditor.Size = new Size(300, 198);
+            groupBoxManualEditor.TabIndex = 19;
+            groupBoxManualEditor.TabStop = false;
+            groupBoxManualEditor.Text = "Manual Editor";
             // 
             // radioDisable
             // 
@@ -280,6 +282,7 @@
             buttonDisableAllSeats.TabIndex = 2;
             buttonDisableAllSeats.Text = "Disable All";
             buttonDisableAllSeats.UseVisualStyleBackColor = true;
+            buttonDisableAllSeats.Click += buttonDisableAllSeats_Click;
             // 
             // buttonEnableAllSeats
             // 
@@ -290,6 +293,7 @@
             buttonEnableAllSeats.TabIndex = 1;
             buttonEnableAllSeats.Text = "Enable All";
             buttonEnableAllSeats.UseVisualStyleBackColor = true;
+            buttonEnableAllSeats.Click += buttonEnableAllSeats_Click;
             // 
             // buttonEditorMode
             // 
@@ -300,6 +304,7 @@
             buttonEditorMode.TabIndex = 0;
             buttonEditorMode.Text = "Enter Editor Mode";
             buttonEditorMode.UseVisualStyleBackColor = true;
+            buttonEditorMode.Click += buttonEditorMode_Click;
             // 
             // buttonResetSimulation
             // 
@@ -323,7 +328,7 @@
             // 
             // textNumPeople
             // 
-            textNumPeople.Location = new Point(147, 280);
+            textNumPeople.Location = new Point(147, 282);
             textNumPeople.Name = "textNumPeople";
             textNumPeople.Size = new Size(201, 31);
             textNumPeople.TabIndex = 26;
@@ -332,7 +337,7 @@
             // 
             labelNoOfPeople.AutoSize = true;
             labelNoOfPeople.ForeColor = SystemColors.ActiveCaptionText;
-            labelNoOfPeople.Location = new Point(38, 281);
+            labelNoOfPeople.Location = new Point(38, 283);
             labelNoOfPeople.Name = "labelNoOfPeople";
             labelNoOfPeople.Size = new Size(103, 25);
             labelNoOfPeople.TabIndex = 25;
@@ -342,36 +347,59 @@
             // 
             panelSeats.BackColor = SystemColors.ControlLightLight;
             panelSeats.BorderStyle = BorderStyle.FixedSingle;
-            panelSeats.Controls.Add(button13);
+            panelSeats.Controls.Add(textScreen);
             panelSeats.Location = new Point(382, 48);
             panelSeats.Margin = new Padding(4, 5, 4, 5);
             panelSeats.Name = "panelSeats";
             panelSeats.Size = new Size(1167, 1092);
             panelSeats.TabIndex = 27;
             // 
-            // button13
+            // textScreen
             // 
-            button13.BackColor = Color.Coral;
-            button13.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            button13.ForeColor = SystemColors.ActiveCaptionText;
-            button13.Location = new Point(218, 35);
-            button13.Name = "button13";
-            button13.Size = new Size(780, 41);
-            button13.TabIndex = 1;
-            button13.Text = "SCREEN";
-            button13.UseVisualStyleBackColor = false;
+            textScreen.BackColor = Color.OrangeRed;
+            textScreen.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            textScreen.Location = new Point(277, 32);
+            textScreen.Name = "textScreen";
+            textScreen.Size = new Size(660, 50);
+            textScreen.TabIndex = 0;
+            textScreen.Text = "Screen";
+            textScreen.TextAlign = HorizontalAlignment.Center;
+            // 
+            // buttonUndo
+            // 
+            buttonUndo.BackColor = SystemColors.ControlDark;
+            buttonUndo.Location = new Point(38, 88);
+            buttonUndo.Name = "buttonUndo";
+            buttonUndo.Size = new Size(146, 34);
+            buttonUndo.TabIndex = 28;
+            buttonUndo.Text = "Undo";
+            buttonUndo.UseVisualStyleBackColor = false;
+            buttonUndo.Click += buttonUndo_Click;
+            // 
+            // buttonRedo
+            // 
+            buttonRedo.BackColor = SystemColors.ControlDark;
+            buttonRedo.Location = new Point(198, 88);
+            buttonRedo.Name = "buttonRedo";
+            buttonRedo.Size = new Size(150, 34);
+            buttonRedo.TabIndex = 29;
+            buttonRedo.Text = "Redo";
+            buttonRedo.UseVisualStyleBackColor = false;
+            buttonRedo.Click += buttonRedo_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1573, 1170);
+            Controls.Add(buttonRedo);
+            Controls.Add(buttonUndo);
             Controls.Add(panelSeats);
             Controls.Add(textMessageStatus);
             Controls.Add(textNumPeople);
             Controls.Add(buttonResetSimulation);
             Controls.Add(labelNoOfPeople);
-            Controls.Add(groupBox1);
+            Controls.Add(groupBoxManualEditor);
             Controls.Add(buttonEndSimulation);
             Controls.Add(menuStrip1);
             Controls.Add(buttonLoad);
@@ -391,9 +419,10 @@
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            groupBoxManualEditor.ResumeLayout(false);
+            groupBoxManualEditor.PerformLayout();
             panelSeats.ResumeLayout(false);
+            panelSeats.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -418,7 +447,7 @@
         private Label label5;
         private TextBox textMaxSeats;
         private Button buttonEndSimulation;
-        private GroupBox groupBox1;
+        private GroupBox groupBoxManualEditor;
         private RadioButton radioDisable;
         private RadioButton radioEnable;
         private Button buttonDisableAllSeats;
@@ -429,6 +458,8 @@
         private TextBox textNumPeople;
         private Label labelNoOfPeople;
         private Panel panelSeats;
-        private Button button13;
+        private TextBox textScreen;
+        private Button buttonUndo;
+        private Button buttonRedo;
     }
 }

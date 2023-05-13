@@ -7,17 +7,18 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
+    [Serializable]
     public class Seat
     {
         private bool _bookStatus = false;
-        private bool _canBook = false;
+        private bool _canBook = true;
         private int _row;
         private int _column;
 
         public Seat( int row, int column)
         {
-            Row = row;
-            Column = column;
+            _row = row;
+            _column = column;
         }
 
         public int Row //property
@@ -65,18 +66,13 @@ namespace DSAL_CA1.Classes
         {
             Label labelSeat = new Label();//Instantiate a new Label type object, labelSeat
             labelSeat.Text = ComputeSeatLabel();//Set the Text property by using a string
-            labelSeat.Location = new Point((60 * (_column - 1)) + 60 + (20 * (_column - 1)), (60 * (_row - 1)) + 60 + (20 * (_row - 1)));//Create a Point type object which has x,y coordinate info
-            labelSeat.Size = new Size(60, 60);//Create a Size type object which has the width, height info
+            labelSeat.Size = new Size(70, 60);//Create a Size type object which has the width, height info
             labelSeat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;//Align the Text to mid - center
             labelSeat.BorderStyle = BorderStyle.FixedSingle;//Make the border visible
-            labelSeat.BackColor = Color.LightBlue;//Set the background color
+            labelSeat.BackColor = Color.DarkGray;//Set the background color
             labelSeat.Font = new Font("Calibri", 14, FontStyle.Bold);
             labelSeat.ForeColor = Color.Black;
             labelSeat.Tag = new SeatInfo() { Row = _row, Column = _column };
-            if (this.BookStatus == true)
-            {
-                labelSeat.BackColor = Color.LightGreen;
-            }
             return labelSeat;
         }
 

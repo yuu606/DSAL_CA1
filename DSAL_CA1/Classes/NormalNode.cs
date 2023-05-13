@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
+    [Serializable]
     public class NormalNode : BaseNode
     {
         //properties 
         private Seat _seat;
 
         //constructor
+        public NormalNode() { }
         public NormalNode(Seat pSeat)
         {
             this._seat = pSeat;
