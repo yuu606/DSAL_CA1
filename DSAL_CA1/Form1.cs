@@ -75,6 +75,9 @@ namespace DSAL_CA1
                         Control btn = this.Controls[name];
                         btn.Enabled = false;
                         count = maxSeats;
+
+                        seat.BookStatus = false;
+                        label.BackColor= Color.DarkGray;
                     }
                 }
             }
@@ -110,12 +113,18 @@ namespace DSAL_CA1
         {
             saveObject.ReadFromFile(seatList);
 
-            List<Label> labelList = seatList.GenerateLabels();
+            foreach (Label seatLabel in panelSeats.Controls.OfType<Label>().ToList())
+            {
+                panelSeats.Controls.Remove(seatLabel);
+            }//remove previous seatlabels (if any)
+
+            List<Label> labelList = seatList.GenerateListLabels();
 
             foreach (Label label in labelList)
             {
                 {
                     label.Click += new System.EventHandler(labelSeat_Click);
+                    panelSeats.Controls.Add(label);
                 }
             }
         }//end of buttonLoad 
@@ -376,7 +385,7 @@ namespace DSAL_CA1
         //=============================================================================
         private void buttonUndo_Click(object sender, EventArgs e)
         {
-            undoRedoCount--;
+            actions.Undo();
         }// end of undo
         //=============================================================================
 
@@ -384,7 +393,7 @@ namespace DSAL_CA1
         //=============================================================================
         private void buttonRedo_Click(object sender, EventArgs e)
         {
-            undoRedoCount++;
+            actions.Redo();
         }// end of redo 
     }
 }

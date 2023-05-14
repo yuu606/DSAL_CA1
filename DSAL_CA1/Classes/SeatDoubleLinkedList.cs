@@ -8,7 +8,7 @@ using System.Xml.Linq;
 namespace DSAL_CA1.Classes
 {
     [Serializable]
-    public class SeatDoubleLinkedList
+    internal class SeatDoubleLinkedList
     {
         public NormalNode Start { get; set; }
         public SeatDoubleLinkedList()
@@ -94,7 +94,7 @@ namespace DSAL_CA1.Classes
             }
         }
 
-        public List<Label> GenerateLabels()
+        public List<Label> GenerateListLabels()
         {
             List<Label> labels = new List<Label>();
             NormalNode p = this.Start;

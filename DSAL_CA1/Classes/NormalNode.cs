@@ -7,18 +7,20 @@ using System.Threading.Tasks;
 namespace DSAL_CA1.Classes
 {
     [Serializable]
-    public class NormalNode : BaseNode
+    internal class NormalNode : BaseNode
     {
         //properties 
         private Seat _seat;
+        private NormalNode _prev;
+        private NormalNode _next;
 
         //constructor
         public NormalNode() { }
         public NormalNode(Seat pSeat)
         {
             this._seat = pSeat;
-            Previous = null;
-            Next = null;
+            _next = null;
+            _prev = null;
         }
 
         //methods 
@@ -28,7 +30,17 @@ namespace DSAL_CA1.Classes
             set { _seat = value; }
         }  
 
+        public NormalNode Next
+        {
+            get { return _next; }
+            set { _next = value; }
+        }
 
+        public NormalNode Prev
+        {
+            get { return _prev; }
+            set { _next = value; }
+        }
        
     }//end of class
 }//end of namespace

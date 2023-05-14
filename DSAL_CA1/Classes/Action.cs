@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
+    [Serializable]
     public class Action
     {
         //properties 

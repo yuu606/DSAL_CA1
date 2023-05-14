@@ -24,37 +24,25 @@ namespace DSAL_CA1.Classes
         public int Row //property
         {
             get { return _row; }//get method
-            set
-            {
-                _row = value;
-            }//set method
+            set { _row = value; }//set method
         }
 
         public int Column //property
         {
             get { return _column; } //get method
-            set
-            {
-                _column = value;
-            } //set method
+            set { _column = value;} //set method
         }
 
         public bool CanBook
         {
             get { return _canBook; } //get method
-            set
-            {
-                _canBook = value;
-            }
+            set { _canBook = value; } //set method
         }
 
         public bool BookStatus
         {
             get { return _bookStatus; } //get method
-            set
-            {
-                _bookStatus = value;
-            }
+            set { _bookStatus = value; } //set method
         }
 
         public string ComputeSeatLabel()
