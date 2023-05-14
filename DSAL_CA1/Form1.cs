@@ -126,6 +126,7 @@ namespace DSAL_CA1
         private void buttonSave_Click(object sender, EventArgs e)
         {
             saveObject.SaveToFile(seatList);
+            saveObject.SaveToFile(actions);
         }//end of buttonSave
         //=============================================================================
 
@@ -133,12 +134,12 @@ namespace DSAL_CA1
         //=============================================================================
         private void buttonGenerateSeats_Click_1(object sender, EventArgs e)
         {
-            foreach (var seatLabel in this.panelSeats.Controls.OfType<Label>())
+            foreach (Label seatLabel in panelSeats.Controls.OfType<Label>().ToList())
             {
-                Controls.Remove(seatLabel);
+                panelSeats.Controls.Remove(seatLabel);
             }//remove previous seatlabels (if any)
             seatList.deleteAllNodes();
-            
+
             //input values
             if (textNumRows.Text.Length > 0 && textSeatPRow.Text.Length > 0 && textRowDivider.Text.Length > 0 && textColumnDivider.Text.Length > 0)
             {
@@ -149,28 +150,27 @@ namespace DSAL_CA1
                 textMessageStatus.Text = arrRowDivider[0];
 
                 //parsing logic for row divider 
-                if (arrRowDivider.Length > 3)
+                if (arrRowDivider.Length > 4)
                 {
-                    MessageBox.Show("Not more than 3 row dividers");
+                    MessageBox.Show("Not more than 4 row dividers");
                 }
 
                 String[] arrColumnDivider = textColumnDivider.Text.Split(",");
 
                 //parsing logic for column divider 
-                if (arrRowDivider.Length > 3)
+                if (arrRowDivider.Length > 4)
                 {
-                    MessageBox.Show("Not more than 3 column dividers");
+                    MessageBox.Show("Not more than 4 column dividers");
                 }
 
                 int i = 0;
                 int j = 0;
-                int k = 0;
-                int l = 0;
-                bool done = false;
-                bool done2 = false;
+                int yOffsetMultiplier = 0;
 
                 for (i = 1; i <= numRows; i++)
                 {
+                    int xOffsetMultiplier = 0;
+
                     for (j = 1; j <= SeatsPRow; j++)
                     {
                         Seat s = new Seat(i, j);
@@ -178,54 +178,32 @@ namespace DSAL_CA1
                         Label labelSeat = s.generateSeatLabel();
                         int x = 0;
                         int y = 0;
+                        int xOffset = 0;
+                        int yOffset = 0;
 
-                        for (k = 0; k < arrColumnDivider.Length; k++)
-                        {
-                            if (done)
-                            {
-                                k++;
-                            }
-                            if (j > Int32.Parse(arrColumnDivider[k]))
-                            {
-                                int temp = Int32.Parse(arrColumnDivider[k]) * 10 * (k + 1);
-                                x = (80 + (80 * (j - 1)) + (temp));
-                                break;
-                            }
-                            else
-                            {
-                                x = (60 * (j - 1)) + 80 + (20 * (j - 1));
-                            }
-                        }
+                        xOffset = xOffsetMultiplier * 50;
+                        x = 80 + (80 * (j - 1)) + xOffset;
 
-                        for (l = 0; l < arrRowDivider.Length; l++)
-                        {
-                            if (done2)
-                            {
-                                l++;
-                            }
-
-                            if (i > Int32.Parse(arrRowDivider[l]))
-                            {
-                                int temp = Int32.Parse(arrRowDivider[l]) * 10 * (l + 1);
-                                y = (100 + (80 * (i - 1) + (temp)));
-                                done2 = true;
-                                break;
-                            }
-                            else
-                            {
-                                y = (60 * (i - 1)) + 100 + (20 * (i - 1));
-                            }
-                        }
+                        yOffset = yOffsetMultiplier * 50;
+                        y = 100 + (80 * (i - 1)) + yOffset;
 
                         labelSeat.Location = new Point(x, y);
                         labelSeat.Click += new EventHandler(labelSeat_Click);
                         //Add control to panelSeats
                         this.panelSeats.Controls.Add(labelSeat);
+                        if (xOffsetMultiplier < arrColumnDivider.Length && j == int.Parse(arrColumnDivider[xOffsetMultiplier]))
+                        {
+                            xOffsetMultiplier++;
+                        }
+                    }
+                    if (yOffsetMultiplier < arrRowDivider.Length && i == int.Parse(arrRowDivider[yOffsetMultiplier]))
+                    {
+                        yOffsetMultiplier++;
                     }
                 }
 
                 generateBookingButtons(); // generate booking buttons
-                disbaleManualEditor2();
+                disableManualEditor2();
             }
             else
             {
@@ -242,7 +220,7 @@ namespace DSAL_CA1
             foreach (var btn in bookingButtons)
             {
                 btn.Enabled = false;
-            }
+            } 
             foreach (var seatLabel in this.panelSeats.Controls.OfType<Label>())
             {
                 seatLabel.Enabled = false;
@@ -275,8 +253,13 @@ namespace DSAL_CA1
         {
             short num;
             int intNumPeople = 4;
+
             if (Int16.TryParse(textNumPeople.Text, out num))
             {
+                if (num < 4)
+                {
+                    MessageBox.Show("There needs to be at least 4 people");
+                }
                 if (num > 0)
                 {
                     intNumPeople = num;
@@ -287,7 +270,7 @@ namespace DSAL_CA1
             {
                 Person person = new Person(charArr[i]);
                 Button newButton = person.generatePersonButton(colorArr[i]);
-                newButton.Location = new Point(25, 410 + (i * 40));
+                newButton.Location = new Point(25, textMaxSeats.Bottom + 10 + (i * 40));
                 newButton.Name = "personBookingButton" + charArr[i];
                 newButton.Tag = charArr[i];
                 this.Controls.Add(newButton);
@@ -308,7 +291,7 @@ namespace DSAL_CA1
         }
         //=============================================================================
 
-        private void disbaleManualEditor2()
+        private void disableManualEditor2()
         {
             buttonEditorMode.Enabled = false;
             radioDisable.Enabled = false;
@@ -371,7 +354,6 @@ namespace DSAL_CA1
                 Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
                 seatLabel.BackColor = Color.Maroon;
                 seat.CanBook = false;
-
             }
         }
         //=============================================================================

@@ -25,7 +25,7 @@ namespace DSAL_CA1.Classes
         public Button generatePersonButton(Color color)
         {
             Button button = new Button();
-            button.Size = new Size(315, 35);
+            button.Size = new Size(200, 25);
             button.Text = "Person " + this._Char + " Booking";
             button.BackColor = color;
             button.ForeColor = Color.Black;

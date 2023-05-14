@@ -9,6 +9,9 @@ namespace DSAL_CA1.Classes
     internal class SmartNode : BaseNode
     {
         private SmartSeat _smartSeat;
+
+        public SmartNode() { }
+
         public SmartNode(SmartSeat pSmartSeat)
         {
             _smartSeat = pSmartSeat;
@@ -19,5 +22,7 @@ namespace DSAL_CA1.Classes
             get { return _smartSeat; }
             set { _smartSeat = value; }
         }
+
+        
     }
 }
