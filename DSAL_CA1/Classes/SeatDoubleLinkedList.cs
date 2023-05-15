@@ -8,9 +8,10 @@ using System.Xml.Linq;
 namespace DSAL_CA1.Classes
 {
     [Serializable]
-    internal class SeatDoubleLinkedList
+    class SeatDoubleLinkedList
     {
         public NormalNode Start { get; set; }
+
         public SeatDoubleLinkedList()
         {
             this.Start = null;
@@ -60,18 +61,6 @@ namespace DSAL_CA1.Classes
             Console.WriteLine("All nodes are deleted successfully.");
         }
 
-
-        public void InsertBefore(Seat pSeatData) 
-        {
-            NormalNode newNode = new NormalNode(pSeatData);
-            
-        }
-
-        public void InsertAfter(Seat pSeat) 
-        { 
-            
-        }
-
         public Seat SearchByRowAndColumn(int pRow, int pColumn)
         {
             NormalNode p = this.Start;
@@ -93,28 +82,5 @@ namespace DSAL_CA1.Classes
                 return p.Seat;
             }
         }
-
-        public List<Label> GenerateListLabels()
-        {
-            List<Label> labels = new List<Label>();
-            NormalNode p = this.Start;
-            while (p != null)
-            {
-                Label labelSeat = p.Seat.generateSeatLabel();
-                labels.Add(labelSeat);
-
-                p = (NormalNode)p.Next; //Continue to the next node
-            }//While loop
-            if (p == null)
-            {
-                return labels;
-            }
-            else
-            {
-                return labels;
-            }//End of if..else block
-        }
-
-
     }//end of class
 }//end of namespace

@@ -107,16 +107,5 @@ namespace DSAL_CA1.Classes
             action.Execute();
             _undoStack.Push(action);
         }
-
-        public void PrintList()
-        {
-            ActionNode current = _head;
-            while (current != null)
-            {
-                Console.Write(current.Action + " ");
-                current = (ActionNode)current.Next;
-            }
-            Console.WriteLine();
-        }
     }
 }

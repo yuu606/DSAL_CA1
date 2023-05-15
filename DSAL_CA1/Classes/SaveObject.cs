@@ -26,6 +26,7 @@ namespace DSAL_CA1.Classes
                 if ((stream = saveFileDialog.OpenFile()) != null)
                 {
                     BinaryFormatter f = new BinaryFormatter();
+                    #pragma warning disable SYSLIB0011
                     f.Serialize(stream, obj);
                     stream.Close();
                 }

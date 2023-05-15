@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace DSAL_CA1.Classes
     [Serializable]
     public class Seat
     {
+        private Char _person;
+        private Color _color = Color.DarkGray;
         private bool _bookStatus = false;
         private bool _canBook = true;
         private int _row;
@@ -45,6 +48,18 @@ namespace DSAL_CA1.Classes
             set { _bookStatus = value; } //set method
         }
 
+        public Char Person
+        {
+            get { return _person; }
+            set { _person = value; }
+        }
+
+        public Color Color
+        {
+            get { return _color; }
+            set { _color = value; }
+        }
+
         public string ComputeSeatLabel()
         {
             return ((char)(_row + 64)).ToString() + _column.ToString();
@@ -57,12 +72,12 @@ namespace DSAL_CA1.Classes
             labelSeat.Size = new Size(70, 60);//Create a Size type object which has the width, height info
             labelSeat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;//Align the Text to mid - center
             labelSeat.BorderStyle = BorderStyle.FixedSingle;//Make the border visible
-            labelSeat.BackColor = Color.DarkGray;//Set the background color
+            labelSeat.BackColor = Color.Gray;//Set the background color
             labelSeat.Font = new Font("Calibri", 14, FontStyle.Bold);
             labelSeat.ForeColor = Color.Black;
             labelSeat.Tag = new SeatInfo() { Row = _row, Column = _column };
+
             return labelSeat;
         }
-
     }//end of Seat Class
 }//end of namespace

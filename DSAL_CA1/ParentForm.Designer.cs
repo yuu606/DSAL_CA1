@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             menuStrip1 = new MenuStrip();
             simulationModeToolStripMenuItem = new ToolStripMenuItem();
             normalModeToolStripMenuItem = new ToolStripMenuItem();
