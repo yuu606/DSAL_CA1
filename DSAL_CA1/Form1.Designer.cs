@@ -330,6 +330,7 @@
             // 
             buttonUndo.BackColor = SystemColors.ControlDark;
             buttonUndo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonUndo.ForeColor = SystemColors.ActiveCaptionText;
             buttonUndo.Location = new Point(39, 88);
             buttonUndo.Name = "buttonUndo";
             buttonUndo.Size = new Size(146, 33);
@@ -342,6 +343,7 @@
             // 
             buttonRedo.BackColor = SystemColors.ControlDark;
             buttonRedo.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonRedo.ForeColor = SystemColors.ActiveCaptionText;
             buttonRedo.Location = new Point(199, 88);
             buttonRedo.Name = "buttonRedo";
             buttonRedo.Size = new Size(150, 33);
