@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
-    public class ActionNode : Node<Action>
+    public class SeatInfo
     {
-        //constructor
-        public ActionNode(Action action) : base(Action) { }
+        public int Row { get; set; }
+        public int Column { get; set; }
     }
 }

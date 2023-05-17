@@ -9,23 +9,5 @@ namespace DSAL_CA1.Classes
     [Serializable]
     public class Action
     {
-        //properties 
-        bool hasBooked;
-        Seat seat;
-
-        //default constructor
-        public Action() { }
-
-        public bool HasBooked 
-        { 
-            get {  return hasBooked; } 
-            set { hasBooked = value; }  
-        }
-
-        public Seat Seat 
-        { 
-            get { return seat; } 
-            set { seat = value; }
-        }
     }
 }

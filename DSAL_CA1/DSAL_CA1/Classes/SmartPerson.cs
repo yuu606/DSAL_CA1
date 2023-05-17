@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
-    public class ActionNode : Node<Action>
+    internal class SmartPerson
     {
-        //constructor
-        public ActionNode(Action action) : base(Action) { }
     }
 }

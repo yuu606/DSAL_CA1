@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace DSAL_CA1.Classes
 {
-    public class ActionNode : Node<Action>
+    class PersonManager
     {
-        //constructor
-        public ActionNode(Action action) : base(Action) { }
+
+        PersonManager() { }
+        
+        private void getPerson(Char pChar)
+        {
+
+        }
     }
 }
