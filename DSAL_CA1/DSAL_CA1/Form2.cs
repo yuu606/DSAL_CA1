@@ -14,8 +14,8 @@ namespace DSAL_CA1
     public partial class Form2 : Form
     {
         SmartSeatDoubleLinkedList seatList = new SmartSeatDoubleLinkedList();
-        
-        SaveObject saveObject = new SaveObject();
+
+        private SaveObject saveObject;
         Color[] colorArr = { Color.Red, Color.Blue, Color.Orange, Color.Yellow, Color.Purple, Color.Brown, Color.Pink };
         char[] charArr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
         int numRows;
@@ -27,11 +27,6 @@ namespace DSAL_CA1
         public Form2()
         {
             InitializeComponent();
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
         }
 
         //Close form 

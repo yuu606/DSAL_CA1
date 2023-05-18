@@ -11,9 +11,14 @@ namespace DSAL_CA1.Classes
 {
     internal class SaveObject
     {
-        public SaveObject() { }
+        private CinemaState _cinemaState;
 
-        public void SaveToFile(object? obj)
+        public SaveObject(CinemaState cinemaState)
+        {
+            _cinemaState = cinemaState;
+        }
+
+        public void SaveToFile()
         {
             Stream stream;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -27,13 +32,13 @@ namespace DSAL_CA1.Classes
                 {
                     BinaryFormatter f = new BinaryFormatter();
                     #pragma warning disable SYSLIB0011
-                    f.Serialize(stream, obj);
+                    f.Serialize(stream, _cinemaState);
                     stream.Close();
                 }
             }
         }
 
-        public void ReadFromFile(object? obj)
+        public CinemaState ReadFromFile()
         {
             string filePath;
 
@@ -51,10 +56,11 @@ namespace DSAL_CA1.Classes
 
                 if (stream.Length != 0)
                 {
-                    obj = (object?)f.Deserialize(stream);
+                    _cinemaState = (CinemaState)f.Deserialize(stream);
                 }
                 stream.Close();
             }
+            return _cinemaState;
         }
     }
 }

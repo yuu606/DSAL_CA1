@@ -421,7 +421,6 @@
             Margin = new Padding(2);
             Name = "Form2";
             Text = "Form2";
-            Load += Form2_Load;
             panelSeats.ResumeLayout(false);
             panelSeats.PerformLayout();
             groupBoxManualEditor.ResumeLayout(false);
