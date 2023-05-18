@@ -11,7 +11,7 @@ namespace DSAL_CA1
     public partial class Form1 : Form
     {
         SeatDoubleLinkedList seatList = new();
-        ActionsList actionsList = new();
+        ActionsList actionsList;
         List<Person> persons = new();
         List<Button> personButtons = new();
         List<Label> labelSeats = new();
@@ -75,6 +75,8 @@ namespace DSAL_CA1
 
                     if (seat.BookStatus == false && count <= maxSeats)
                     {
+                        Node<Seat> p = seatList.GetNode(seat.Row, seat.Column);
+                        //insert in adjacent seat booking logic here
                         seat.BookStatus = true;
                         seat.Person = persons[i];
                         seat.Color = colorArr[i];
@@ -199,7 +201,7 @@ namespace DSAL_CA1
         //=============================================================================
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            saveObject.SaveToFile(seatList);
+            saveObject.SaveToFile(seatList); 
         }//end of buttonSave
         //=============================================================================
 
@@ -282,7 +284,7 @@ namespace DSAL_CA1
                     }
                 }
 
-
+                actionsList = new(labelSeats, seatList);
                 generateBookingButtons(); // generate booking buttons
                 disableManualEditor2();
             }

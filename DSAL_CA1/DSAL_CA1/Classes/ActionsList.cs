@@ -16,8 +16,10 @@ namespace DSAL_CA1.Classes
         public Stack<BaseActions> _undoStack { get; set; }
         public Stack<BaseActions> _redoStack { get; set; }
 
-        public ActionsList() 
+        public ActionsList(List<Label> labels, SeatDoubleLinkedList seatList) 
         {
+            this.labels = labels;
+            this.seatList = seatList;
             _undoStack = new Stack<BaseActions>();
             _redoStack = new Stack<BaseActions>();
         }

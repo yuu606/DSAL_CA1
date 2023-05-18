@@ -34,6 +34,28 @@ namespace DSAL_CA1.Classes
             }
         }
 
+        public Node<Seat> GetNode(int pRow, int pColumn)
+        {
+            Node<Seat> p = Head;
+            while (p != null)
+            {
+                if ((p.Data.Column == pColumn) && (p.Data.Row == pRow))
+                {
+                    //If the node referenced by p satisfies the search criteria, exit the loop
+                    break;
+                }
+                p = p.Next;
+            }
+            if (p == null)
+            {
+                return null;
+            }
+            else
+            {
+                return p;
+            }
+        }
+
         public void InsertAtBeginning(Seat pSeatData)
         {
             Node<Seat> newNode = new Node<Seat>(pSeatData);
