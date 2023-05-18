@@ -55,6 +55,7 @@ namespace DSAL_CA1
                 SeatInfo seatInfo = (SeatInfo)label.Tag;
                 Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
                 Node<Seat> seatNode = seatList.GetNode(seatInfo.Row, seatInfo.Column);
+                
 
                 if (seat.CanBook == false)
                 {
@@ -62,51 +63,87 @@ namespace DSAL_CA1
                 }
                 else
                 {
-                    if (seat.Person.personSeatList.Count > 0)
+                    if (count > 1)
                     {
+                        var personSeatHead = persons[i]._PersonSeatNodeDoubleLinkedList.Head;
+                        var personSeatTail = persons[i]._PersonSeatNodeDoubleLinkedList.Tail;
+                        var Start = seatList.Head;
 
+
+                        while (Start != null)
+                        {
+                            if (personSeatHead.Equals(Start) && Start.Prev != null)
+                            {
+                                personSeatHead = Start.Prev;
+                            }
+
+                            if (personSeatHead.Equals(personSeatTail) && Start.Next != null)
+                            {
+                                personSeatTail = Start.Next;
+                            }
+
+                            Start = Start.Next;
+                        }
+
+
+                        if (seatNode != personSeatHead || seatNode != personSeatTail)
+                        {
+                            MessageBox.Show("You can only book adjacent seats");
+                        }
+                        else
+                        {
+                            if (count >= maxSeats)
+                            {
+                                MessageBox.Show("Maximum number of seats reached");
+                                Button btn = personButtons[i];
+                                btn.Enabled = false;
+                                foreach (Label labels in labelSeats)
+                                {
+                                    {
+                                        labels.Click -= labelSeat_Click;
+                                    }
+                                }
+                                return;
+                            }
+
+                            if (seat.BookStatus == false && count <= maxSeats)
+                            {
+                                Node<Seat> p = seatList.GetNode(seat.Row, seat.Column);
+                                seat.BookStatus = true;
+                                seat.Person = persons[i];
+                                seat.Color = colorArr[i];
+                                label.BackColor = seat.Color;
+                                count++;
+                                persons[i]._PersonSeatNodeDoubleLinkedList.InsertAtEnd(seat);
+
+                                BookAction book = new(seat, seat.Person, label);
+                                actionsList._redoStack.Push(book);
+                            }
+                            else if (seat.BookStatus == true && count <= maxSeats)
+                            {
+                                seat.BookStatus = false;
+                                seat.Person = persons[i];
+                                seat.Color = Color.Gray;
+                                label.BackColor = seat.Color;
+                                count--;
+                                persons[i]._PersonSeatNodeDoubleLinkedList.RemoveAtEnd(seat);
+
+                                UnbookAction unbook = new(seat, seat.Person, label);
+                                actionsList._redoStack.Push(unbook);
+                            }
+                        }
                     }
                     else
                     {
-
-                    }
-                    if (count >= maxSeats)
-                    {
-                        MessageBox.Show("Maximum number of seats reached");
-                        Button btn = personButtons[i];
-                        btn.Enabled = false;
-                        foreach (Label labels in labelSeats)
-                        {
-                            {
-                                labels.Click -= new System.EventHandler(labelSeat_Click);
-                            }
-                        }
-                        return;
-                    }
-
-                    if (seat.BookStatus == false && count <= maxSeats)
-                    {
-                        Node<Seat> p = seatList.GetNode(seat.Row, seat.Column);
-                        //insert in adjacent seat booking logic here
                         seat.BookStatus = true;
                         seat.Person = persons[i];
                         seat.Color = colorArr[i];
                         label.BackColor = seat.Color;
                         count++;
+                        persons[i]._PersonSeatNodeDoubleLinkedList.InsertAtBeginning(seat);
 
-                        BookAction book = new BookAction(seat, seat.Person, label);
+                        BookAction book = new(seat, seat.Person, label);
                         actionsList._redoStack.Push(book);
-                    }
-                    else
-                    {
-                        seat.BookStatus = false;
-                        seat.Person = persons[i];
-                        seat.Color = Color.Gray;
-                        label.BackColor = seat.Color;
-                        count--;
-
-                        UnbookAction unbook = new UnbookAction(seat, seat.Person, label);
-                        actionsList._redoStack.Push(unbook);
                     }
                 }
             }
@@ -154,7 +191,7 @@ namespace DSAL_CA1
                     }
                 }
 
-                textMessageStatus.Text = "Person " + persons[i].Char + " is booking";
+                textMessageStatus.Text = "Person " + persons[i]._Char + " is booking";
             } else
             {
                 MessageBox.Show("Please input maximum number of seats first");
@@ -367,7 +404,8 @@ namespace DSAL_CA1
             {
                 for (int i = 0; i < num; i++)
                 {
-                    Person person = new Person(charArr[i]);
+                    SeatDoubleLinkedList seatDoubleLinkedList = new();
+                    Person person = new Person(charArr[i], seatDoubleLinkedList);
                     Button newButton = person.generatePersonButton(colorArr[i]);
 
                     newButton.Location = new Point(25, textMaxSeats.Bottom + 10 + (i * 40));

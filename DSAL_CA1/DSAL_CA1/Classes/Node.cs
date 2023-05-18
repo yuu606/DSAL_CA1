@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DSAL_CA1.Classes
 {
@@ -41,6 +43,22 @@ namespace DSAL_CA1.Classes
                 Tail.Next = newNode;
                 newNode.Prev = Tail;
                 Tail = newNode;
+            }
+        }
+
+        public void RemoveAtEnd(T data)
+        {
+            if (Head == null)
+            {
+                return;
+            }
+            else
+            {
+                Tail = Tail.Prev;
+                if (Tail != null)
+                {
+                    Tail.Next = null;
+                }
             }
         }
     }

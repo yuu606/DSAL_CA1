@@ -11,22 +11,23 @@ namespace DSAL_CA1.Classes
     {
         
         public Color Color { get; set; }
-        public char Char { get; set; }
-        public List<Seat> personSeatList { get; set; }
+        public char _Char { get; set; }
+        public SeatDoubleLinkedList _PersonSeatNodeDoubleLinkedList { get; set; }
 
-        public Person(char pChar)
+        public Person(char Char, SeatDoubleLinkedList PersonSeatNodeDoubleLinkedList)
         {
-            this.Char = pChar;
+            _Char = Char;
+            _PersonSeatNodeDoubleLinkedList = PersonSeatNodeDoubleLinkedList;
         }
 
         public Button generatePersonButton(Color color)
         {
             Button button = new Button();
             button.Size = new Size(200, 25);
-            button.Text = "Person " + this.Char + " Booking";
+            button.Text = "Person " + _Char + " Booking";
             button.BackColor = color;
             button.ForeColor = Color.Black;
-            button.Name = "ButtonPerson" + this.Char + "Booking";
+            button.Name = "ButtonPerson" + _Char + "Booking";
             return button;
         }
     }
