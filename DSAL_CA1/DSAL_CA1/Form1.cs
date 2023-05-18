@@ -54,12 +54,22 @@ namespace DSAL_CA1
                 Label label = (Label)sender;
                 SeatInfo seatInfo = (SeatInfo)label.Tag;
                 Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
+                Node<Seat> seatNode = seatList.GetNode(seatInfo.Row, seatInfo.Column);
+
                 if (seat.CanBook == false)
                 {
                     MessageBox.Show("This seat is unavailable for booking");
                 }
                 else
                 {
+                    if (seat.Person.personSeatList.Count > 0)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
                     if (count >= maxSeats)
                     {
                         MessageBox.Show("Maximum number of seats reached");
@@ -102,9 +112,7 @@ namespace DSAL_CA1
             }
             else
             {
-
                 MessageBox.Show("Please input maximum number of seats first");
-
             }
         }
         //=============================================================================
@@ -120,7 +128,6 @@ namespace DSAL_CA1
                 {
                     foreach (Label labels in labelSeats)
                     {
-                        labels.Click += labelSeat_Click;
                         labels.BackColor = Color.Gray;
                     }
 
@@ -132,7 +139,12 @@ namespace DSAL_CA1
                         start = start.Next;
                     }
                 }
-                
+
+                foreach (Label labels in labelSeats)
+                {
+                    labels.Click += labelSeat_Click;
+                }
+
                 count = 0;
                 for (i = 0; i < charArr.Length; i++)
                 {
@@ -413,7 +425,12 @@ namespace DSAL_CA1
                 buttonEditorMode.Text = "Exit Editor Mode";
                 foreach (var seatLabel in labelSeats)
                 {
-                    seatLabel.BackColor = Color.Green;
+                    SeatInfo seatInfo = (SeatInfo)seatLabel.Tag;
+                    Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
+                    if (seat.CanBook == true)
+                    {
+                        seatLabel.BackColor = Color.Green;
+                    }
                     seatLabel.Enabled = true;
                     seatLabel.Click -= labelSeat_Click;
                     seatLabel.Click += enableDisableSeats_Click;
@@ -435,12 +452,14 @@ namespace DSAL_CA1
 
                 foreach (var seatLabel in labelSeats)
                 {
-                    if (seatLabel.BackColor != Color.DarkRed)
+                    SeatInfo seatInfo = (SeatInfo)seatLabel.Tag;
+                    Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
+
+                    if (seat.CanBook == true)
                     {
                         seatLabel.BackColor = Color.DarkGray;
                     }// leave disabled seats' color to be red
 
-                    seatLabel.Click += labelSeat_Click;
                     seatLabel.Click -= enableDisableSeats_Click;
                 } // change event handler
 
@@ -466,7 +485,7 @@ namespace DSAL_CA1
             if (radioDisable.Checked)
             {
                 seat.CanBook = false;
-                label.BackColor = Color.Maroon;
+                label.BackColor = Color.DarkRed;
             }
         }
         //=============================================================================
@@ -479,7 +498,7 @@ namespace DSAL_CA1
             {
                 SeatInfo seatInfo = (SeatInfo)seatLabel.Tag;
                 Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
-                seatLabel.BackColor = Color.Maroon;
+                seatLabel.BackColor = Color.DarkRed;
                 seat.CanBook = false;
             }
         }

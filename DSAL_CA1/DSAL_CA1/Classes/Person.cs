@@ -12,12 +12,12 @@ namespace DSAL_CA1.Classes
         
         public Color Color { get; set; }
         public char Char { get; set; }
+        public List<Seat> personSeatList { get; set; }
 
         public Person(char pChar)
         {
             this.Char = pChar;
         }
-
 
         public Button generatePersonButton(Color color)
         {
@@ -29,11 +29,5 @@ namespace DSAL_CA1.Classes
             button.Name = "ButtonPerson" + this.Char + "Booking";
             return button;
         }
-
-        public Button Button
-        {
-            get; set;
-        }
-
     }
 }
