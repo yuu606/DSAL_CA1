@@ -55,7 +55,6 @@ namespace DSAL_CA1
                 SeatInfo seatInfo = (SeatInfo)label.Tag;
                 Seat seat = seatList.SearchByRowAndColumn(seatInfo.Row, seatInfo.Column);
                 Node<Seat> seatNode = seatList.GetNode(seatInfo.Row, seatInfo.Column);
-                
 
                 if (seat.CanBook == false)
                 {
@@ -63,75 +62,66 @@ namespace DSAL_CA1
                 }
                 else
                 {
-                    if (count > 1)
+                    
+                    var personSeatTail = persons[i]._PersonSeatNodeDoubleLinkedList.Tail;
+                    var personSeatHead = persons[i]._PersonSeatNodeDoubleLinkedList.Head;
+                    var Start = seatList.Head;
+
+                    if (count == 0)
                     {
-                        var personSeatHead = persons[i]._PersonSeatNodeDoubleLinkedList.Head;
-                        var personSeatTail = persons[i]._PersonSeatNodeDoubleLinkedList.Tail;
-                        var Start = seatList.Head;
+                        persons[i]._PersonSeatNodeDoubleLinkedList.InsertAtEnd(seat);
+                        seatNode = persons[i]._PersonSeatNodeDoubleLinkedList.Head;
+                    }
 
-
-                        while (Start != null)
+                    while (Start != null)
+                    {
+                        if (personSeatHead.Equals(Start))
                         {
-                            if (personSeatHead.Equals(Start) && Start.Prev != null)
-                            {
-                                personSeatHead = Start.Prev;
-                            }
-
-                            if (personSeatHead.Equals(personSeatTail) && Start.Next != null)
-                            {
-                                personSeatTail = Start.Next;
-                            }
-
-                            Start = Start.Next;
+                            personSeatHead = Start;
                         }
 
-
-                        if (seatNode != personSeatHead || seatNode != personSeatTail)
+                        Start = Start.Next;
+                    }
+                    while (Start != null)
+                    {
+                        if (personSeatHead.Equals(Start) && Start.Prev != null)
                         {
-                            MessageBox.Show("You can only book adjacent seats");
+                            personSeatHead = Start.Prev;
                         }
-                        else
+
+                        if (personSeatHead.Equals(personSeatTail) && Start.Next != null)
                         {
-                            if (count >= maxSeats)
-                            {
-                                MessageBox.Show("Maximum number of seats reached");
-                                Button btn = personButtons[i];
-                                btn.Enabled = false;
-                                foreach (Label labels in labelSeats)
-                                {
-                                    {
-                                        labels.Click -= labelSeat_Click;
-                                    }
-                                }
-                                return;
-                            }
-
-                            if (seat.BookStatus == false && count <= maxSeats)
-                            {
-                                Node<Seat> p = seatList.GetNode(seat.Row, seat.Column);
-                                seat.BookStatus = true;
-                                seat.Person = persons[i];
-                                seat.Color = colorArr[i];
-                                label.BackColor = seat.Color;
-                                count++;
-                                persons[i]._PersonSeatNodeDoubleLinkedList.InsertAtEnd(seat);
-
-                                BookAction book = new(seat, seat.Person, label);
-                                actionsList._redoStack.Push(book);
-                            }
-                            else if (seat.BookStatus == true && count <= maxSeats)
-                            {
-                                seat.BookStatus = false;
-                                seat.Person = persons[i];
-                                seat.Color = Color.Gray;
-                                label.BackColor = seat.Color;
-                                count--;
-                                persons[i]._PersonSeatNodeDoubleLinkedList.RemoveAtEnd(seat);
-
-                                UnbookAction unbook = new(seat, seat.Person, label);
-                                actionsList._redoStack.Push(unbook);
-                            }
+                            personSeatTail = Start.Next;
                         }
+
+                        Start = Start.Next;
+                    }
+
+
+                    if (seat.BookStatus == false && count <= maxSeats)
+                    {
+                        Node<Seat> p = seatList.GetNode(seat.Row, seat.Column);
+                        seat.BookStatus = true;
+                        seat.Person = persons[i];
+                        seat.Color = colorArr[i];
+                        label.BackColor = seat.Color;
+                        count++;
+                        persons[i]._PersonSeatNodeDoubleLinkedList.InsertAtEnd(seat);
+
+                        BookAction book = new(seat, seat.Person, label);
+                        actionsList._redoStack.Push(book);
+                    }
+                    else if (seat.BookStatus == true && count <= maxSeats)
+                    {
+                        seat.BookStatus = false;
+                        seat.Person = persons[i];
+                        seat.Color = Color.Gray;
+                        label.BackColor = seat.Color;
+                        count--;
+                        persons[i]._PersonSeatNodeDoubleLinkedList.RemoveAtEnd(seat);
+
+                        UnbookAction unbook = new(seat, seat.Person, label);
+                        actionsList._redoStack.Push(unbook);
                     }
                     else
                     {
@@ -154,9 +144,9 @@ namespace DSAL_CA1
         }
         //=============================================================================
 
-        //event handler when person button is clicked 
-        //=============================================================================
-        private void personBookingButton_Click(object sender, EventArgs e)
+            //event handler when person button is clicked 
+            //=============================================================================
+            private void personBookingButton_Click(object sender, EventArgs e)
         {
             if (textMaxSeats.Text.Length > 0)
             {
