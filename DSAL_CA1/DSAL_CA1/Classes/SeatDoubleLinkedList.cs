@@ -34,29 +34,29 @@ namespace DSAL_CA1.Classes
             }
         }
 
-        /*public void InsertAtBeginning(Seat pSeatData)
+        public void InsertAtBeginning(Seat pSeatData)
         {
-            SeatNode newNode = new SeatNode(pSeatData);
-            if (this.Start == null)
+            Node<Seat> newNode = new Node<Seat>(pSeatData);
+            if (Head == null)
             {
-                this.Start = newNode;
+                Head = newNode;
             } else
             {
-                newNode.Next = this.Start;
-                this.Start.Prev = newNode;
-                this.Start = newNode;
+                newNode.Next = Head;
+                Head.Prev = newNode;
+                Head = newNode;
             }
         }
 
         public void InsertAtEnd(Seat pSeatData)
         {
-            SeatNode newNode = new SeatNode(pSeatData);
-            if (this.Start == null)
+            Node<Seat> newNode = new Node<Seat>(pSeatData);
+            if (Head == null)
             {
-                this.Start = newNode;
+                Head = newNode;
                 return;
             }
-            SeatNode p = this.Start;
+            Node<Seat> p = Head;
 
             while (p.Next != null)
             {
@@ -64,7 +64,7 @@ namespace DSAL_CA1.Classes
             }
             p.Next = newNode;
             newNode.Prev = p;
-        }//end of InsertAtEnd*/
+        }//end of InsertAtEnd
 
 
     }//end of class

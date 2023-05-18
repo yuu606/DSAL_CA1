@@ -10,12 +10,12 @@ namespace DSAL_CA1
 {
     public partial class Form1 : Form
     {
-        SeatDoubleLinkedList seatList = new ();
-        ActionsList actionsList = new ();
-        List<Person> persons = new ();
-        List<Button> personButtons = new ();
-        List<Label> labelSeats = new ();
-        SaveObject saveObject = new ();
+        SeatDoubleLinkedList seatList = new();
+        ActionsList actionsList = new();
+        List<Person> persons = new();
+        List<Button> personButtons = new();
+        List<Label> labelSeats = new();
+        SaveObject saveObject = new();
         Color[] colorArr = { Color.Red, Color.Blue, Color.Orange, Color.Yellow, Color.Purple, Color.Brown, Color.Pink };
         char[] charArr = { 'A', 'B', 'C', 'D', 'E', 'F', 'G' };
         int numRows;
@@ -59,13 +59,12 @@ namespace DSAL_CA1
                 }
                 else
                 {
-                    if (count > maxSeats)
+                    if (count >= maxSeats)
                     {
                         MessageBox.Show("Maximum number of seats reached");
-                        String name = "personBookingButton" + charArr[i];
-                        Control btn = this.Controls[name];
+                        Button btn = personButtons[i];
                         btn.Enabled = false;
-                        foreach (Label labels in panelSeats.Controls.OfType<Label>().ToList())
+                        foreach (Label labels in labelSeats)
                         {
                             {
                                 labels.Click -= new System.EventHandler(labelSeat_Click);
@@ -85,8 +84,7 @@ namespace DSAL_CA1
                         BookAction book = new BookAction(seat, seat.Person, label);
                         actionsList._redoStack.Push(book);
                     }
-
-                    if (seat.BookStatus == true && count <= maxSeats)
+                    else
                     {
                         seat.BookStatus = false;
                         seat.Person = persons[i];
@@ -98,10 +96,12 @@ namespace DSAL_CA1
                         actionsList._redoStack.Push(unbook);
                     }
                 }
-            } else { 
+            }
+            else
+            {
 
-               MessageBox.Show("Please input maximum number of seats first");
-                
+                MessageBox.Show("Please input maximum number of seats first");
+
             }
         }
         //=============================================================================
@@ -114,23 +114,22 @@ namespace DSAL_CA1
             {
                 foreach (Label labels in labelSeats)
                 {
-                    labels.Click += new System.EventHandler(labelSeat_Click);
+                    labels.Click += labelSeat_Click;
                     labels.BackColor = Color.Gray;
                 }
 
-                Node<Seat> Start = seatList.Head;
+                Node<Seat> start = seatList.Head;
 
-                while (seatList != null)
+                while (start != null)
                 {
-                    Start.Data.CanBook = true;
-                    Start = Start.Next;
+                    start.Data.CanBook = true;
+                    start = start.Next;
                 }
-                
 
                 count = 0;
                 Button btn = (Button)sender;
-                String[] arr = btn.Text.Split(" ");
-                Char _char = Char.Parse(arr[1]);
+                string[] arr = btn.Text.Split(" ");
+                char _char = char.Parse(arr[1]);
                 for (i = 0; i < charArr.Length; i++)
                 {
                     if (_char == charArr[i])
@@ -172,7 +171,7 @@ namespace DSAL_CA1
 
                 if (stream.Length != 0)
                 {
-                    #pragma warning disable SYSLIB0011
+#pragma warning disable SYSLIB0011
                     seatList = (SeatDoubleLinkedList)f.Deserialize(stream);
                 }
                 stream.Close();
@@ -191,7 +190,7 @@ namespace DSAL_CA1
             {
                 label.Click += new System.EventHandler(labelSeat_Click);
                 panelSeats.Controls.Add(label);
-                
+
             }
         }//end of buttonLoad 
         //=============================================================================
@@ -282,7 +281,7 @@ namespace DSAL_CA1
                         yOffsetMultiplier++;
                     }
                 }
-                
+
 
                 generateBookingButtons(); // generate booking buttons
                 disableManualEditor2();
@@ -326,12 +325,13 @@ namespace DSAL_CA1
                 }
 
                 Node<Seat> Start = seatList.Head;
-                while (seatList != null)
+                while (Start != null)
                 {
                     Start.Data.CanBook = false;
                     Start = Start.Next;
                 }
-            } else
+            }
+            else
             {
                 MessageBox.Show("You have no seats set up");
             }
@@ -421,7 +421,7 @@ namespace DSAL_CA1
             }
 
             Node<Seat> Start = seatList.Head;
-            while (seatList != null)
+            while (Start != null)
             {
                 Start.Data.CanBook = true;
                 Start = Start.Next;
@@ -442,14 +442,14 @@ namespace DSAL_CA1
                 seat.CanBook = true;
                 label.BackColor = Color.Green;
 
-                
+
             }
             else
             {
                 seat.CanBook = false;
                 label.BackColor = Color.Maroon;
 
-                
+
             }
         }
         //=============================================================================
@@ -466,7 +466,7 @@ namespace DSAL_CA1
                 seat.CanBook = false;
             }
 
-           
+
         }
         //=============================================================================
 
