@@ -14,4 +14,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DSAL_CA1
-build_property.ProjectDir = C:\DSAL\CA1_v2\DSAL_CA1\DSAL_CA1\
+build_property.ProjectDir = C:\DSAL\CA1_v3\DSAL_CA1\DSAL_CA1\

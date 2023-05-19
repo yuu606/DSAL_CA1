@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\DSAL\\CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj": {}
+    "C:\\DSAL\\CA1_v3\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj": {}
   },
   "projects": {
-    "C:\\DSAL\\CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj": {
+    "C:\\DSAL\\CA1_v3\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\DSAL\\CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj",
+        "projectUniqueName": "C:\\DSAL\\CA1_v3\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj",
         "projectName": "DSAL_CA1",
-        "projectPath": "C:\\DSAL\\CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj",
-        "packagesPath": "C:\\Users\\Yuu\\.nuget\\packages\\",
-        "outputPath": "C:\\DSAL\\CA1\\DSAL_CA1\\DSAL_CA1\\obj\\",
+        "projectPath": "C:\\DSAL\\CA1_v3\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1.csproj",
+        "packagesPath": "C:\\Users\\chong\\.nuget\\packages\\",
+        "outputPath": "C:\\DSAL\\CA1_v3\\DSAL_CA1\\DSAL_CA1\\DSAL_CA1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Yuu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\chong\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
